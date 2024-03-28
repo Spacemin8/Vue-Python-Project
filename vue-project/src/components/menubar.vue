@@ -1,0 +1,16 @@
+<template>
+  <div class="menu-bar">
+    <div class="logo-size1"></div>
+    <div class="button-container">
+      <button class="btn-login" (click)="handlelogin()">Log in</button>
+      <button class="btn-signup btn-eff" (click)="handlesignup()">
+        Sign up
+      </button>
+    </div>
+  </div>
+</template>
+<script>
+</script>
+<style lang="sass" scoped>
+@import "@/components/menubar: .sass"
+</style>

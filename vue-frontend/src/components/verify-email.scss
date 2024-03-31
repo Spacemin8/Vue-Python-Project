@@ -13,19 +13,18 @@
 	height: 110px;
 }
 
-.log-in {
+.verify {
 	position: absolute;
-	top: 317px;
+	top: 390px;
 	width: 376px;
-	height: 370px;
 }
 
-.browser {
+.bar {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: absolute;
-	bottom: 80px;
+	bottom: 266px;
 	width: 50%;
 	height: 67px;
 }
@@ -56,7 +55,7 @@
 
 
 .but-style {
-	width: 100%;
+	width: 378px;
 	border-radius: 10px;
 
 	&:hover {
@@ -116,55 +115,14 @@
 
 .button3 {
 	height: 60px;
-	margin-top: 70px;
 	background: linear-gradient(113.87deg, #DD5690 14.81%, #FDB95F 88.76%);
 	box-shadow: 0px 6px 18px 0px #F2A69C;
 	font-weight: 700;
 	color: #FFFFFF;
 }
 
-.btnreset {
-	margin-top: 20px;
-	box-sizing: border-box;
-	padding: 15px 96px;
-	background: linear-gradient(113.87deg, rgba(221, 86, 144, 0.1) 14.81%, rgba(252, 181, 97, 0.1) 88.76%);
-	font-weight: 500;
-	color: #24262D;
-}
-
-.button-style {
-	margin: 0px 10px;
-	width: 66px;
-	height: 66px;
-	border: 1px;
-	border-radius: 34px;
-	border-image-source: linear-gradient(180deg, #F26A96 0%, rgba(196, 38, 142, 0) 100%);
-	background: linear-gradient(90.63deg, rgba(239, 60, 137, 0.78) 9.11%, rgba(249, 185, 63, 0.78) 90.16%);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-}
-
-.button-style .instegram {
-	display: none;
-}
-
 @media only screen and (max-width: 900px) {
-
-	.button-style .instegram {
-		display: block;
-	}
-
-	.button-style .metamask {
-		display: none;
-	}
-
-	.button-style {
-		margin: 0px 20px;
-	}
-
-	.browser {
+	.bar {
 		position: absolute;
 		width: 100%;
 		height: 126px;

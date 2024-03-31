@@ -1,12 +1,12 @@
 <script>
 import logo from "../components/logo.vue";
 import appmenu from "../components/app-menu.vue";
-import resetpass from "../components/resetpass.vue";
+import verifyemail from "../components/verify-email.vue";
 export default {
   components: {
     logo,
     appmenu,
-    resetpass,
+    verifyemail,
   },
 };
 </script>
@@ -19,12 +19,12 @@ export default {
         <logo />
       </div>
       <div class="Login-set">
-        <resetpass />
+        <verifyemail />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-@import "./resetpasspage.scss";
+@import "./Verify-email.scss";
 </style>

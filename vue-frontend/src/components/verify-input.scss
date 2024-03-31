@@ -1,0 +1,46 @@
+.verify-group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 60px;
+	border-radius: 10px;
+	border: 1px solid #F8E6D9;
+	gap: 20px;
+	background-color: #FFFFFF;
+	margin-top: 24px;
+}
+
+.in-style {
+	width: 38px;
+	height: 28px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.in-element {
+	width: 20px;
+	height: 24px;
+	margin: 0px;
+	font-family: Cairo;
+	font-size: 23px;
+	font-weight: 500;
+	line-height: 22px;
+	letter-spacing: 0em;
+	text-align: center;
+	color: #24262D;
+	outline: none;
+	border-radius: 1px;
+	border-bottom: 2px solid #000000;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	background-color: #ffffff;
+	background-size: cover;
+}
+
+.divider {
+	height: 26px;
+	width: 1px;
+	background-color: #F8E6D9;
+}

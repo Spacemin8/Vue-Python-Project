@@ -48,5 +48,5 @@ export default {
 </template>
 
 <style scoped>
-@import "./focusfooter.scss";
+@import "./app-footer.scss";
 </style>

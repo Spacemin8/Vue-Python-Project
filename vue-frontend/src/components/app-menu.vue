@@ -20,5 +20,5 @@ export default {
 </template>
 
 <style scoped>
-@import "./menubar.scss";
+@import "./app-menu.scss";
 </style>

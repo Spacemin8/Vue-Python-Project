@@ -60,5 +60,5 @@ export default {
 </template>
 
 <style scoped>
-@import "./focusbar.scss";
+@import "./app-header.scss";
 </style>

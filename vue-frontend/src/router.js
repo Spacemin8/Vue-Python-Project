@@ -3,6 +3,7 @@ import loginpage from './scene/loginpage.vue';
 import signuppage from './scene/signuppage.vue';
 import resetpasspage from './scene/resetpasspage.vue';
 import dashboardpage from './scene/dashboardpage.vue';
+import verifyemail from './scene/Verify-email.vue';
 const routes = [
   {
     path: '/login',
@@ -13,6 +14,11 @@ const routes = [
     path: '/signup',
     name: 'signuppage',
     component: signuppage
+  },
+  {
+    path: '/signup/verifyemail',
+    name: 'verifyemail',
+    component: verifyemail
   },
   {
     path: '/reset',

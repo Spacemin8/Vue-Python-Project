@@ -1,11 +1,11 @@
 <script>
 import logo from "../components/logo.vue";
-import menubar from "../components/menubar.vue";
+import appmenu from "../components/app-menu.vue";
 import signup from "../components/signup.vue";
 export default {
   components: {
     logo,
-    menubar,
+    appmenu,
     signup,
   },
 };
@@ -13,7 +13,7 @@ export default {
 
 <template>
   <div>
-    <menubar />
+    <appmenu />
     <div class="signup-page">
       <div class="signup-back">
         <logo />

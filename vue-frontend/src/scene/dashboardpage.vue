@@ -1,12 +1,12 @@
 <script>
-import focusbar from "../components/focusbar.vue";
+import appheader from "../components/app-header.vue";
 import focus from "../components/focus.vue";
-import focusfooter from "../components/focusfooter.vue";
+import appfooter from "../components/app-footer.vue";
 export default {
   components: {
-    focusbar,
+    appheader,
     focus,
-    focusfooter,
+    appfooter,
   },
 };
 </script>
@@ -14,13 +14,13 @@ export default {
 <template>
   <div class="dashboard-back">
     <div class="dashbar">
-      <focusbar />
+      <appheader />
     </div>
     <div>
       <focus />
     </div>
     <div>
-      <focusfooter />
+      <appfooter />
     </div>
   </div>
 </template>

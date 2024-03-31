@@ -1,11 +1,11 @@
 <script>
 import logo from "../components/logo.vue";
-import menubar from "../components/menubar.vue";
+import appmenu from "../components/app-menu.vue";
 import login from "../components/login.vue";
 export default {
   components: {
     logo,
-    menubar,
+    appmenu,
     login,
   },
 };
@@ -13,7 +13,7 @@ export default {
 
 <template>
   <div>
-    <menubar />
+    <appmenu />
     <div class="Login-page">
       <div class="Login-back">
         <logo />

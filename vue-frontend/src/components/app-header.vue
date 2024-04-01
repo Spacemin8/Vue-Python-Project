@@ -12,8 +12,10 @@ export default {
       butmenu: "src/assets/image/menu-04.png",
     };
   },
-  handleLogout() {
-    this.$router.push("/signup");
+  methods: {
+    handlelogout() {
+      this.$router.push("/signup");
+    },
   },
 };
 </script>
@@ -48,13 +50,13 @@ export default {
       </button>
     </div>
     <div class="btn-log">
-      <button class="btn-Focus">
+      <button class="btn-Focus" @click="handlelogout">
         <img :src="Logout" alt="logout" />
         <p class="btn-p">Log out</p>
       </button>
     </div>
     <div class="btn-menu">
-      <img :src="butmenu" alt="butmenu" @click="handleLogout" />
+      <img :src="butmenu" alt="butmenu" />
     </div>
   </div>
 </template>

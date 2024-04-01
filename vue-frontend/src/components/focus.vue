@@ -66,7 +66,7 @@ export default {
             self-development !
           </span>
         </p>
-        <button class="morebutton">Load More</button>
+        <button class="more-button">Load More</button>
       </div>
     </div>
   </div>

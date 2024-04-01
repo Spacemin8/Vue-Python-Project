@@ -1,10 +1,12 @@
 <script>
 export default {
-  handlelogin() {
-    this.$router.push("/login");
-  },
-  handlesignup() {
-    this.$router.push("/signup");
+  methods: {
+    handlelogin() {
+      this.$router.push("/login");
+    },
+    handlesignup() {
+      this.$router.push("/signup");
+    },
   },
 };
 </script>

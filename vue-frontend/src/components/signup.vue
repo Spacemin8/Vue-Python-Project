@@ -18,8 +18,25 @@ export default {
       password: "",
     };
   },
-  handlelogin() {
-    this.$router.push("/login");
+  methods: {
+    handlelogin() {
+      this.$router.push("/login");
+    },
+    signup() {
+      const userData = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
+      axios
+        .post("http://localhost:8000/signup/", userData)
+        .then((response) => {
+          console.log("Signup successful", response.data);
+        })
+        .catch((error) => {
+          console.error("Signup error", error.response.data);
+        });
+    },
   },
 };
 </script>
@@ -33,7 +50,7 @@ export default {
         with registration or sign up with social media
       </p>
     </div>
-    <form class="sign-up">
+    <form onsubmit="signup()" class="sign-up">
       <vueinput
         :icon="user"
         type="text"
@@ -53,7 +70,7 @@ export default {
         :v-model="password"
       />
       <button type="submit" class="button3 but-style">Proceed</button>
-      <button class="btn-sign but-style" @click="handlelogin()">
+      <button class="btn-sign but-style" @click="handlelogin">
         I already have an account
       </button>
     </form>

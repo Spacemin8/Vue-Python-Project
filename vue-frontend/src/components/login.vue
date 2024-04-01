@@ -16,8 +16,24 @@ export default {
       password: "",
     };
   },
-  handlesignup() {
-    this.$router.push("/signup");
+  methods: {
+    handlesignup() {
+      this.$router.push("/signup");
+    },
+    login() {
+      const credentials = {
+        email: this.email,
+        password: this.password,
+      };
+      axios
+        .post("http://localhost:8000/login/", credentials)
+        .then((response) => {
+          console.log("Login successful", response.data);
+        })
+        .catch((error) => {
+          console.log("Login error", error.response.data);
+        });
+    },
   },
 };
 </script>

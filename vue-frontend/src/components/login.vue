@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import vueinput from "./input.vue";
 export default {
   components: {
@@ -20,15 +21,25 @@ export default {
     handlesignup() {
       this.$router.push("/signup");
     },
+    handledashboard() {
+      this.$router.push("/dashboard");
+    },
     login() {
       const credentials = {
         email: this.email,
         password: this.password,
       };
+      console.log(credentials);
       axios
-        .post("http://localhost:8000/login/", credentials)
+        .post("http://127.0.0.1:8000/user/login/", credentials)
         .then((response) => {
+          const accesstoken = response.data.accesstoken;
+          const refreshtoken = response.data.refreshtoken;
+          console.log(accesstoken);
           console.log("Login successful", response.data);
+          this.handledashboard();
+          localStorage.setItem("accesstoken", accesstoken);
+          localStorage.setItem("refreshtoken", refreshtoken);
         })
         .catch((error) => {
           console.log("Login error", error.response.data);
@@ -53,15 +64,17 @@ export default {
         :icon="mail"
         type="email"
         placeholder="Enter email"
-        :v-model="email"
+        v-model="email"
       />
       <vueinput
         :icon="passkey"
         type="password"
         placeholder="Phone Number (Optional)"
-        :v-model="password"
+        v-model="password"
       />
-      <button type="submit" class="button3 but-style">Log In</button>
+      <button type="button" class="button3 but-style" @click="login">
+        Log In
+      </button>
       <button class="btnlog but-style" @click="handlesignup">
         I forgot my password
       </button>

@@ -51,11 +51,11 @@ def login(request):
         if check_password(password,userExist.password):
           accesstoken=jwt.encode(credentials,Asecretkey,algorithm="HS256")
           refreshtoken=jwt.encode(credentials,Rsecretkey,algorithm="HS256")
-          tokendata=Token(
+          data=Token(
             accesstoken=accesstoken,
             refreshtoken=refreshtoken
           )
-          tokendata.save()
+          data.save()
           return JsonResponse({'success': 'Login Successfully!!!', 'tokencreate':'token created successfully', 'accesstoken':accesstoken,'refreshtoken':refreshtoken},status=200)
         else:
           return JsonResponse({'error': 'password invalid.'},status=400)

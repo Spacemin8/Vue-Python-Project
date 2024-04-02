@@ -9,6 +9,10 @@ export default {
       fizz: "src/assets/image/FIZZ.png",
     };
   },
+  methods: {
+    onEdit() {},
+    onDelete() {},
+  },
   props: {
     title: String,
     description: String,

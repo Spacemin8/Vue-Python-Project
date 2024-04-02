@@ -29,6 +29,9 @@ const routes = [
     path: '/dashboard',
     name: 'dashboardpage',
     component: dashboardpage
+    // meta: {
+    //   requireAuth: true
+    // }
   }
   // Add more routes as needed
 ];
@@ -37,5 +40,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 });
+// router.beforeEach((to, from, next) => {
+//   const requireAuth = to.matched.some((x) => x.meta.requireAuth);
+//   const requireGuest = to.matched.some((x) => x.meta.requireGuest);
+// });
 
 export default router;

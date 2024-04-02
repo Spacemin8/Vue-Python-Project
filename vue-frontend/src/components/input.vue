@@ -1,15 +1,14 @@
-<script>
-export default {
-  props: {
-    icon: {
-      type: String,
-      required: true,
-    },
+<script setup>
+import { defineModel } from "vue";
+const props = defineProps({
+  icon: {
     type: String,
-    placeholder: String,
+    required: true,
   },
-  value: "",
-};
+  type: String,
+  placeholder: String,
+});
+const value = defineModel();
 </script>
 
 <template>
@@ -21,8 +20,8 @@ export default {
       :type="type"
       class="input-control"
       required
-      v-model="value"
       :placeholder="placeholder"
+      v-model="value"
     />
   </div>
 </template>

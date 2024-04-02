@@ -1,5 +1,6 @@
 <script>
 import vueinput from "./input.vue";
+import axios from "axios";
 export default {
   components: {
     vueinput,
@@ -29,9 +30,10 @@ export default {
         password: this.password,
       };
       axios
-        .post("http://localhost:8000/signup/", userData)
+        .post("http://127.0.0.1:8000/user/signup/", userData)
         .then((response) => {
           console.log("Signup successful", response.data);
+          this.handlelogin();
         })
         .catch((error) => {
           console.error("Signup error", error.response.data);
@@ -40,7 +42,6 @@ export default {
   },
 };
 </script>
-
 <template>
   <div class="signup-container">
     <div class="title">
@@ -50,26 +51,28 @@ export default {
         with registration or sign up with social media
       </p>
     </div>
-    <form onsubmit="signup()" class="sign-up">
+    <form class="sign-up">
       <vueinput
         :icon="user"
         type="text"
         placeholder="Enter username"
-        :v-model="username"
+        v-model="username"
       />
       <vueinput
         :icon="mail"
         type="mail"
         placeholder="Enter email"
-        :v-model="mail"
+        v-model="email"
       />
       <vueinput
         :icon="phone"
         type="text"
         placeholder="Phone Number (Optional)"
-        :v-model="password"
+        v-model="password"
       />
-      <button type="submit" class="button3 but-style">Proceed</button>
+      <button type="button" class="button3 but-style" @click="signup">
+        Proceed
+      </button>
       <button class="btn-sign but-style" @click="handlelogin">
         I already have an account
       </button>

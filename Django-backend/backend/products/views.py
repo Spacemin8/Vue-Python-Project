@@ -4,6 +4,8 @@ from .models import Product
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.core.serializers import serialize
+
 # Create your views here.
 @csrf_exempt  # Use this decorator to exempt the view from CSRF verification
 def create(request):
@@ -16,15 +18,15 @@ def create(request):
             description=description
         )
         Productcard.save()
-        return JsonResponse({'success' : 'Object created successfully','title' : title, 'description' : description},status=200)
+        return JsonResponse({'success' : 'Object created successfully','title' : title, 'description' : description,'id':Productcard.id},status=200)
 @csrf_exempt  # Use this decorator to exempt the view from CSRF verification
-def update(request):
+def update(request,id):
+    Productcard=Product.objects.get(id=id);
     if(request.method=='PUT'):
         productdata=json.loads(request.body.decode('utf-8'));
-        id=productdata['id']
+       
         title=productdata['title']
         description=productdata['description']
-        Productcard=Product.objects.get(id=id);
         Productcard.title=title
         Productcard.description=description
         Productcard.save()
@@ -32,13 +34,17 @@ def update(request):
 @csrf_exempt
 def load(request):
     if(request.method=='GET'):
-     all_records = Product.objects.all()
-     return JsonResponse(all_records)
+        all_records = list(Product.objects.values())
+        return JsonResponse(all_records,safe=False)
 @csrf_exempt  # Use this decorator to exempt the view from CSRF verification
-def delete(request):
+def delete(request,id):
+    Productcard=Product.objects.get(id=id);
     if(request.method=='DELETE'):
-        productid=json.loads(request.body.decode('utf-8'));
-        id=productid['id']
-        Productcard=Product.objects.get(id=id);
         Productcard.delete()
         return JsonResponse({'success' : 'Object deleted successfully'},status=200)
+@csrf_exempt  # Use this decorator to exempt the view from CSRF verification
+def get_Token(request):
+   auth_header = request.META.get('HTTP_AUTHORIZATION', '')
+   if auth_header.startswith('Bearer '):
+     return auth_header.split(' ')[1]
+   return None

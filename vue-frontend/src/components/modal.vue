@@ -5,21 +5,43 @@ export default {
       isVisible: false,
       title: "",
       description: "",
+      editMode: false,
+      currentItem: null,
     };
   },
   methods: {
-    createItem() {
+    createOrUpdateItem() {
       // Emit an event with the new item data
-      this.$emit("create", {
-        title: this.title,
-        description: this.description,
-      });
+      if (this.editMode) {
+        // Update logic
+        this.$emit("update", {
+          ...this.currentItem,
+          title: this.title,
+          description: this.description,
+        });
+      } else {
+        this.$emit("create", {
+          title: this.title,
+          description: this.description,
+        });
+      }
       this.closeModal();
     },
     cancel() {
       // Emit an event for cancel
       this.$emit("cancel");
       this.closeModal();
+    },
+    editItem(item) {
+      this.editMode = true;
+      this.currentItem = item;
+      this.title = item.title;
+      this.description = item.description;
+      this.openModal();
+    },
+    createItem() {
+      this.editMode = false;
+      this.openModal();
     },
     closeModal() {
       this.isVisible = false;
@@ -37,7 +59,7 @@ export default {
   <transition name="modal">
     <div class="modal" v-if="isVisible">
       <div class="modal-content">
-        <h2>Create FocusPoints</h2>
+        <h2>{{ editMode ? "Edit" : "Create" }} FocusPoints</h2>
         <div appearance="fill" class="form-field">
           <label for="title">Title</label>
           <input
@@ -58,7 +80,9 @@ export default {
           ></textarea>
         </div>
         <div>
-          <button @click="createItem">Create</button>
+          <button @click="createOrUpdateItem">
+            {{ editMode ? "Edit" : "Create" }}
+          </button>
           <button @click="cancel">Cancel</button>
         </div>
       </div>

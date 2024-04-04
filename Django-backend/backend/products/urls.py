@@ -4,6 +4,6 @@ from .views import create,load,update,delete
 urlpatterns = [
   path('create/',create,name='create'),
   path('load/',load,name='load'),
-  path('update/',update,name='update'),
-  path('delete/',delete,name='delete'),
+  path('update/<int:id>/',update,name='update'),
+  path('delete/<int:id>/',delete,name='delete'),
 ]

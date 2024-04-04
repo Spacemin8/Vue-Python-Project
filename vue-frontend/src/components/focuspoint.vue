@@ -1,5 +1,10 @@
 <script>
 export default {
+  props: {
+    id: Number,
+    title: String,
+    description: String,
+  },
   data() {
     return {
       Edit: "src/assets/image/Frame 1000003654.png",
@@ -10,12 +15,17 @@ export default {
     };
   },
   methods: {
-    onEdit() {},
-    onDelete() {},
-  },
-  props: {
-    title: String,
-    description: String,
+    onEdit() {
+      this.$emit("edit", {
+        id: this.$props.id,
+        title: this.$props.title,
+        description: this.$props.description,
+      });
+      console.log(this.$props.id, this.$props.title);
+    },
+    onDelete() {
+      this.$emit("delete");
+    },
   },
 };
 </script>

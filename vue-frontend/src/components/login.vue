@@ -1,5 +1,5 @@
 <script>
-import axios from "axios";
+import http from "../http";
 import vueinput from "./input.vue";
 export default {
   components: {
@@ -30,7 +30,7 @@ export default {
         password: this.password,
       };
       console.log(credentials);
-      axios
+      http
         .post("http://127.0.0.1:8000/user/login/", credentials)
         .then((response) => {
           const accesstoken = response.data.accesstoken;

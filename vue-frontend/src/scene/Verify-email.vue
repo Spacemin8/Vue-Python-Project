@@ -35,5 +35,5 @@ export default {
 </template>
 
 <style scoped>
-@import "./Verify-email.scss";
+@import "./verify-email.scss";
 </style>

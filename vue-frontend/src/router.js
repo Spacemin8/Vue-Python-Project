@@ -3,7 +3,7 @@ import loginpage from './scene/loginpage.vue';
 import signuppage from './scene/signuppage.vue';
 import resetpasspage from './scene/resetpasspage.vue';
 import dashboardpage from './scene/dashboardpage.vue';
-import verifyemail from './scene/Verify-email.vue';
+import verifyEmail from './scene/verify-email.vue';
 
 const routes = [
   {
@@ -19,7 +19,7 @@ const routes = [
   {
     path: '/signup/verify',
     name: 'verify',
-    component: verifyemail
+    component: verifyEmail
   },
   {
     path: '/signup/setpassword',
@@ -33,6 +33,10 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: '/',
+    redirect: '/login'
   }
 
   // Add more routes as needed
@@ -45,7 +49,7 @@ const router = createRouter({
 export default router;
 router.beforeEach((to, from, next) => {
   const accessToken = localStorage.getItem('accesstoken');
-
+  console.log(accessToken);
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // This route requires authentication, check if the token is present
     if (accessToken) {

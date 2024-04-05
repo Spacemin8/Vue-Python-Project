@@ -18,8 +18,8 @@ export default {
     };
   },
   methods: {
-    handlesignup() {
-      this.$router.push("/signup");
+    handleSetPassword() {
+      this.$router.push("/signup/setpassword");
     },
     handledashboard() {
       this.$router.push("/dashboard");
@@ -38,6 +38,7 @@ export default {
           console.log(accesstoken);
           console.log("Login successful", response.data);
           this.handledashboard();
+          localStorage.removeItem("username");
           localStorage.setItem("accesstoken", accesstoken);
           localStorage.setItem("refreshtoken", refreshtoken);
         })
@@ -69,13 +70,13 @@ export default {
       <vueinput
         :icon="passkey"
         type="password"
-        placeholder="Phone Number (Optional)"
+        placeholder="Enter Password"
         v-model="password"
       />
       <button type="button" class="button3 but-style" @click="login">
         Log In
       </button>
-      <button class="btnlog but-style" @click="handlesignup">
+      <button class="btnlog but-style" @click="handleSetPassword">
         I forgot my password
       </button>
     </form>

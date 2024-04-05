@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import vueinput from "./input.vue";
 export default {
   components: {
@@ -6,14 +7,39 @@ export default {
   },
   data() {
     return {
-      Ico1: "src/assets/image/Vector.png",
-      passkey: "src/assets/image/Icon4.png",
-      Ico2: "src/assets/image/metamask-icon logo.png",
-      Ico3: "src/assets/image/twitter logo1.png",
-      Ico4: "src/assets/image/Group.png",
+      Ico1: "/src/assets/image/Vector.png",
+      passkey: "/src/assets/image/Icon4.png",
+      Ico2: "/src/assets/image/metamask-icon logo.png",
+      Ico3: "/src/assets/image/twitter logo1.png",
+      Ico4: "/src/assets/image/Group.png",
       password: "",
       Confirm_password: "",
     };
+  },
+  methods: {
+    handleLogin() {
+      this.$router.push("/login");
+    },
+    handleSubmit() {
+      if (this.password == this.Confirm_password) {
+        const post_data = {
+          username: localStorage.getItem("username"),
+          password: this.password,
+        };
+        console.log(post_data);
+        axios
+          .post("http://localhost:8000/user/signup/setpassword/", post_data)
+          .then((response) => {
+            console.log("set password successful", response.data);
+            this.$router.push("/login");
+          })
+          .catch((error) => {
+            alert(response.data.message);
+          });
+      } else {
+        alert("Incorrectly password!");
+      }
+    },
   },
 };
 </script>
@@ -28,24 +54,24 @@ export default {
         and 1 special character
       </p>
     </div>
-    <form class="log-in">
+    <div class="log-in">
       <vueinput
         :icon="passkey"
         type="password"
         placeholder="password"
-        :v-model="password"
+        v-model="password"
       />
       <vueinput
         :icon="passkey"
         type="password"
         placeholder="Confirm password"
-        :v-model="Confirm_password"
+        v-model="Confirm_password"
       />
-      <button type="submit" class="button3 but-style">Submit</button>
-      <button class="btnreset but-style" @click="handlelogin()">
+      <button class="button3 but-style" @click="handleSubmit">Submit</button>
+      <button class="btnreset but-style" @click="handleLogin">
         I already have an account
       </button>
-    </form>
+    </div>
     <div class="browser">
       <button class="button-style">
         <img :src="Ico1" alt="" />

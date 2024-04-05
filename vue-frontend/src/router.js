@@ -16,12 +16,12 @@ const routes = [
     component: signuppage
   },
   {
-    path: '/signup/verifyemail',
-    name: 'verifyemail',
+    path: '/signup/verify',
+    name: 'verify',
     component: verifyemail
   },
   {
-    path: '/reset',
+    path: '/signup/setpassword',
     name: 'resetpasspage',
     component: resetpasspage
   },

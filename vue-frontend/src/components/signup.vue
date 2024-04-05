@@ -12,28 +12,32 @@ export default {
       Ico3: "src/assets/image/twitter logo1.png",
       Ico4: "src/assets/image/Group.png",
       mail: "src/assets/image/Icon2.png",
-      phone: "src/assets/image/Icon3.png",
+      ph: "src/assets/image/Icon3.png",
       user: "src/assets/image/Icon1.png",
       username: "",
       email: "",
-      password: "",
+      phone: "",
     };
   },
   methods: {
-    handlelogin() {
-      this.$router.push("/login");
+    handleVerify() {
+      this.$router.push("/signup/verify");
     },
     signup() {
       const userData = {
         username: this.username,
         email: this.email,
-        password: this.password,
+        phone: this.phone,
       };
       axios
         .post("http://127.0.0.1:8000/user/signup/", userData)
         .then((response) => {
           console.log("Signup successful", response.data);
-          this.handlelogin();
+          const email = userData.email;
+          const username = userData.username;
+          localStorage.setItem("email", email);
+          localStorage.setItem("username", username);
+          this.handleVerify();
         })
         .catch((error) => {
           console.error("Signup error", error.response.data);
@@ -65,10 +69,10 @@ export default {
         v-model="email"
       />
       <vueinput
-        :icon="phone"
-        type="text"
+        :icon="ph"
+        type="number"
         placeholder="Phone Number (Optional)"
-        v-model="password"
+        v-model="phone"
       />
       <button type="button" class="button3 but-style" @click="signup">
         Proceed

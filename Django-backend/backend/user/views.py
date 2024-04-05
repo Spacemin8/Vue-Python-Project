@@ -1,48 +1,83 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.utils import timezone
+from datetime import timedelta
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 import jwt
-import json
+import random
+from rest_framework.decorators import api_view
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import User
-from .models import Token
+from .models import User,verify,Token
 
-@csrf_exempt  # Use this decorator to exempt the view from CSRF verification
 # Create your views here.
+@api_view(['POST'])
 def signup(request):
-    if(request.method=='POST'):
-        payload=json.loads(request.body.decode('utf-8'));
-        username = payload['username']
-        email = payload['email']
-        password = payload['password']
+        code = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+        username = request.data.get('username', None)
+        email = request.data.get('email', None)
+        phone = request.data.get('phone', None)
         userExist=User.objects.filter(email=email)
-        if not (username and email and password):
+        if not (username and email and phone):
           return JsonResponse({'error': 'Missing userdata.'},status=400)
         if(userExist):
           return JsonResponse({'error': 'User already Existed.'},status=400)
-        hashed_password = make_password(password)
-          # Create an instance of the model with the data
         data = User(
             username=username,
             email=email,
-            password=hashed_password,
+            password='',
+            phone=phone,
             # Set other fields as needed
         )
         data.save()
+        new_verify=verify(
+            email=email,
+            verification_code=code,
+            expire_at=timezone.now() + timedelta(minutes=5)
+        )
+        new_verify.save()
+        send_mail(
+            "Your Verification Code",
+            f'Hi {username}, Your verification code is: {code}',
+            settings.EMAIL_HOST_USER,
+            [email],
+            fail_silently=False
+        )
         return JsonResponse({'message': 'UserData saved successfully'},status=200)
 
-@csrf_exempt  # Use this decorator to exempt the view from CSRF verification
+@api_view(['POST'])
+def verifycode(request):
+       email = request.data.get('email', None)
+       verification_code = request.data.get('verification_code', None)
+       if verify.objects.filter(email=email).exists():
+           existing_verification_code= verify.objects.get(email=email)
+           if(existing_verification_code.verification_code == verification_code and timezone.now() < existing_verification_code.expire_at):
+              existing_verification_code.delete()
+              return JsonResponse({"message":"success verified"})
+           return JsonResponse({"message":"invaild verification code"})
+       return JsonResponse({"message":"user does not exist"})
+
+@api_view(['POST'])
+def password_set(request):
+       username = request.data.get('username', None)
+       password = request.data.get('password', None)
+       if User.objects.filter(username=username).exists():
+         current_user=User.objects.get(username=username)
+         hashed_password = make_password(password)
+         current_user.password=hashed_password
+         current_user.save()
+         return JsonResponse({"message":"success set password"})
+       return JsonResponse({"message":"user does not exist"})
+
+@api_view(['POST'])
 def login(request):
-    if(request.method=='POST'):
-        credentials=json.loads(request.body.decode('utf-8'));
-        email=credentials['email']
-        password=credentials['password']
+        email=request.data.get('email',None)
+        password=request.data.get('password',None)
+        credentials={
+            'email':email,
+            'password':password
+        }
         userExist=User.objects.get(email=email)
         Asecretkey="accesstokensecret"
         Rsecretkey="refreshtokensecret"

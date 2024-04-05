@@ -1,12 +1,12 @@
 <script>
 import logo from "../components/logo.vue";
 import appmenu from "../components/app-menu.vue";
-import verifyemail from "../components/verify-email.vue";
+import verifyinput from "../components/verify-input.vue";
 export default {
   components: {
     logo,
     appmenu,
-    verifyemail,
+    verifyinput,
   },
 };
 </script>
@@ -19,7 +19,16 @@ export default {
         <logo />
       </div>
       <div class="Login-set">
-        <verifyemail />
+        <div class="login-container">
+          <div class="title">
+            <p class="text">Verify Your Email</p>
+            <p class="text1">
+              We have send you a code. Check your email<br />
+              and input the code to procced
+            </p>
+          </div>
+          <verifyinput />
+        </div>
       </div>
     </div>
   </div>

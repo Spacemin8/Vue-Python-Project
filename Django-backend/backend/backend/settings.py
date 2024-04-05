@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken'
+
 
 ]
 
@@ -93,7 +95,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'loop4',
+        'NAME': 'loop5',
         'USER': 'postgres',
         'PASSWORD': 'space',
         'HOST': '127.0.0.1',
@@ -145,7 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 from datetime import timedelta
@@ -162,3 +164,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'spacenm1185@outlook.com'
 EMAIL_HOST_PASSWORD = 'ilovespace118'
+# AUTH_USER_MODEL = 'user.User'
+ASECRET_KEY="accesstokensecret"
+RSECRET_KEY="refreshtokensecret"

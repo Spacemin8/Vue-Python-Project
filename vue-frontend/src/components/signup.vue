@@ -55,7 +55,7 @@ export default {
         with registration or sign up with social media
       </p>
     </div>
-    <form class="sign-up">
+    <div class="sign-up">
       <vueinput
         :icon="user"
         type="text"
@@ -80,7 +80,7 @@ export default {
       <button class="btn-sign but-style" @click="handlelogin">
         I already have an account
       </button>
-    </form>
+    </div>
     <div class="browser">
       <button class="button-style">
         <img :src="Ico1" alt="" />

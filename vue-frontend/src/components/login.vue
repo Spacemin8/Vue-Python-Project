@@ -1,5 +1,5 @@
 <script>
-import http from "../http";
+import axios from "axios";
 import vueinput from "./input.vue";
 export default {
   components: {
@@ -30,13 +30,14 @@ export default {
         password: this.password,
       };
       console.log(credentials);
-      http
+      axios
         .post("http://127.0.0.1:8000/user/login/", credentials)
         .then((response) => {
-          const accesstoken = response.data.accesstoken;
-          const refreshtoken = response.data.refreshtoken;
+          const data = response.data;
+          const accesstoken = data.accesstoken;
+          const refreshtoken = data.refreshtoken;
           console.log(accesstoken);
-          console.log("Login successful", response.data);
+          console.log("Login successful", data);
           this.handledashboard();
           localStorage.removeItem("username");
           localStorage.setItem("accesstoken", accesstoken);
@@ -60,7 +61,7 @@ export default {
         account!
       </p>
     </div>
-    <form class="log-in">
+    <div class="log-in">
       <vueinput
         :icon="mail"
         type="email"
@@ -79,7 +80,7 @@ export default {
       <button class="btnlog but-style" @click="handleSetPassword">
         I forgot my password
       </button>
-    </form>
+    </div>
     <div class="browser">
       <button class="button-style">
         <img :src="Ico1" alt="" />

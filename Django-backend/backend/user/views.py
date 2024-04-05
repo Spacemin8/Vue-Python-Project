@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.hashers import make_password
@@ -9,7 +8,8 @@ import jwt
 import random
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
-from .models import User,verify,Token
+from .models import verify,User,Token
+# User=get_user_model()
 
 # Create your views here.
 @api_view(['POST'])
@@ -78,19 +78,17 @@ def login(request):
             'email':email,
             'password':password
         }
-        userExist=User.objects.get(email=email)
-        Asecretkey="accesstokensecret"
-        Rsecretkey="refreshtokensecret"
+        userExist=User.objects.get(email=email)       
         if not (email and password):
           return JsonResponse({'error': 'Missing userdata.'},status=400)
         if check_password(password,userExist.password):
-          accesstoken=jwt.encode(credentials,Asecretkey,algorithm="HS256")
-          refreshtoken=jwt.encode(credentials,Rsecretkey,algorithm="HS256")
-          data=Token(
-            accesstoken=accesstoken,
-            refreshtoken=refreshtoken
-          )
-          data.save()
-          return JsonResponse({'success': 'Login Successfully!!!', 'tokencreate':'token created successfully', 'accesstoken':accesstoken,'refreshtoken':refreshtoken},status=200)
+            accesstoken=jwt.encode(credentials,settings.ASECRET_KEY,algorithm="HS256")
+            refreshtoken=jwt.encode(credentials,settings.RSECRET_KEY,algorithm="HS256")
+            data=Token(
+              accesstoken=accesstoken,
+              refreshtoken=refreshtoken
+            )
+            data.save()
+            return JsonResponse({'success': 'Login Successfully!!!', 'tokencreate':'token created successfully','accesstoken':accesstoken,'refreshtoken':refreshtoken},status=200)
         else:
           return JsonResponse({'error': 'password invalid.'},status=400)

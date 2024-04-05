@@ -3,9 +3,9 @@ import axios from 'axios';
 const http = axios.create({});
 http.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accesstoken');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+    const accesstoken = localStorage.getItem('accesstoken');
+    if (accesstoken) {
+      config.headers['Authorization'] = `Bearer ${accesstoken}`;
     }
     return config;
   },
